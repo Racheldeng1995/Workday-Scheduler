@@ -69,3 +69,17 @@ textarea{
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
+
+.row-border {
+  border-top: 5px grey;
+  border-bottom: 2px grey;
+  border-width: medium;
+}
+
+.row-border-nontime {
+  border-bottom: 5px white;
+}
+
+.column-border {
+  border-right: 10px grey
+}
