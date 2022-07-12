@@ -28,3 +28,12 @@ var genCal = function () {
     
 }
 genCal()
+
+var currentDate = moment().format("dddd, MMMM Do YYYY")
+
+var genCurrent = function () {
+    var current = $("#currentDay")
+    .text(currentDate)
+}
+
+genCurrent()
