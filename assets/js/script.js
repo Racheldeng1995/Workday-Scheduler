@@ -14,14 +14,15 @@ var genCal = function () {
             }
              
             var timeSlotText = $("<p>").text(timeValue)
-            var description = $("<section>").addClass("col-8 border-right")
+            var description = $("<section>").addClass("col-8 description hour")
             .attr("id", i)
             .attr("type", "audit-background")
-            .css("background-color", "white")
+            var descriptionTask = $("<textarea>")
             var save = $("<section>").addClass("col-2")
             
             timeSlot.append(timeSlotText)
             timeRow.append(timeSlot)
+            description.append(descriptionTask)
             timeRow.append(description)
             timeRow.append(save)
             calendar.append(timeRow)
@@ -49,15 +50,15 @@ var timeAudit = function () {
             var slot = parseInt($(this).attr("id"))
             
             if (currentTime == slot) {
-                $(this).css("background-color", "red")
+                $(this).attr('class', "col-8 description present")
             
             }
             else if (currentTime > slot) {
-                $(this).css("background-color", "grey")
+                $(this).attr('class', "col-8 description past")
                
             }
             else {
-                $(this).css("background-color", "green")
+                $(this).attr('class', "col-8 description future")
                
             }
         }
