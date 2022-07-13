@@ -3,7 +3,7 @@ var calendar = $("#calendar-form")
 var genCal = function () {
     for (var i = 9; i <= 17; i++) {
         (function(i) {
-            var timeRow = $("<main>").addClass("row no-gutters border-top border-bottom ")
+            var timeRow = $("<main>").addClass("row  time-block ")
             var timeSlot = $("<section>").addClass("col-2 border-right")
 
             if (i <= 12) {
@@ -15,15 +15,18 @@ var genCal = function () {
              
             var timeSlotText = $("<p>").text(timeValue)
             var description = $("<section>").addClass("col-8 description hour")
-            .attr("id", i)
+            .attr("des-id", i)
             .attr("type", "audit-background")
             var descriptionTask = $("<textarea>")
+            .attr("id", "text-"+i)
             var save = $("<section>").addClass("col-2")
-            
+            var saveBtn = $("<button>").addClass("saveBtn")
+            .attr("btn-id", i)
             timeSlot.append(timeSlotText)
             timeRow.append(timeSlot)
             description.append(descriptionTask)
             timeRow.append(description)
+            save.append(saveBtn)
             timeRow.append(save)
             calendar.append(timeRow)
             }(i))
@@ -47,7 +50,7 @@ var timeAudit = function () {
 
     $("[type = audit-background]").each(
         function() {
-            var slot = parseInt($(this).attr("id"))
+            var slot = parseInt($(this).attr("des-id"))
             
             if (currentTime == slot) {
                 $(this).attr('class', "col-8 description present")
@@ -73,3 +76,51 @@ timeAudit();
 setInterval(function() {
     timeAudit();
   }, 1800000);
+
+var tasksLi = [];
+
+
+$(".saveBtn").click(
+    function() {
+        alert("here")
+        var time = $(this).attr("btn-id")
+        var textId = "text-" + time
+        var desc = $("#"+textId).val()
+        var taskEl = {
+            "timeslot" : time,
+            "descontent": desc
+        }
+
+        var exitTask = JSON.parse(localStorage.getItem("tasks"))
+
+        if (exitTask == null) {
+            tasksLi.push(taskEl)
+            localStorage.setItem("tasks", JSON.stringify(tasksLi))
+        }
+
+        else {
+            var found = exitTask.some(el => el.timeslot === time);
+
+            if (found) {
+                var objIndex = exitTask.findIndex((obj => obj.timeslot ==time));
+                exitTask[objIndex].descontent = desc
+            }
+            else {
+                exitTask.push(taskEl)
+            }
+            
+            localStorage.setItem("tasks", JSON.stringify(exitTask))
+        }
+    }
+)
+
+var loadTask = function () {
+    var loadPage = JSON.parse(localStorage.getItem("tasks"))
+    if (loadPage == null) {
+        return
+    }
+    else {
+        
+    }
+    
+}
