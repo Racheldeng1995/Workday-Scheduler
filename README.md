@@ -10,7 +10,7 @@ Create a simple calendar application that allows a user to save events for each 
 * When the users refresh the page, the saved events persist.
 
 ## Application Deployment
-Live URL:
+Live URL: https://racheldeng1995.github.io/Workday-Scheduler/ 
 
 Screenshot:
 ![image](https://user-images.githubusercontent.com/48065400/178786757-cab897c0-3ffb-4f5e-b127-1052416e374f.png)
