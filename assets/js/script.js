@@ -1,6 +1,6 @@
 var calendar = $("#calendar-form")
 
-var genCal = function () {
+var genCal = function (addText) {
     for (var i = 9; i <= 17; i++) {
         (function(i) {
             var timeRow = $("<main>").addClass("row  time-block ")
@@ -17,8 +17,9 @@ var genCal = function () {
             var description = $("<section>").addClass("col-8 description hour")
             .attr("des-id", i)
             .attr("type", "audit-background")
-            var descriptionTask = $("<textarea>")
+            var descriptionTask = $("<textarea>").text(addText)
             .attr("id", "text-"+i)
+            .attr("type", "text")
             var save = $("<section>").addClass("col-2")
             var saveBtn = $("<button>").addClass("saveBtn")
             .attr("btn-id", i)
@@ -116,11 +117,22 @@ $(".saveBtn").click(
 
 var loadTask = function () {
     var loadPage = JSON.parse(localStorage.getItem("tasks"))
-    if (loadPage == null) {
+
+    // if nothing in localStorage, create a new object to track all task status arrays
+    if (!loadPage) {
         return
     }
+
     else {
-        
-    }
-    
+        for (j = 0; j < loadPage.length; j++) {
+            (function(j) {
+                var timeIndex= loadPage[j]["timeslot"]
+                var textContent = loadPage[j]["descontent"]
+                $("#" + "text-" + timeIndex).text(textContent)
+            } (j))
+            
+        }
+    }  
 }
+
+loadTask()
