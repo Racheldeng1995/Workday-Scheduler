@@ -3,8 +3,8 @@ var calendar = $("#calendar-form")
 var genCal = function (addText) {
     for (var i = 9; i <= 17; i++) {
         (function(i) {
-            var timeRow = $("<main>").addClass("row  time-block ")
-            var timeSlot = $("<section>").addClass("col-2 border-right")
+            var timeRow = $("<main>").addClass("row")
+            var timeSlot = $("<section>").addClass("col-2 border-top border-right text-right")
 
             if (i <= 12) {
                 var timeValue = i+"AM"
@@ -20,15 +20,15 @@ var genCal = function (addText) {
             var descriptionTask = $("<textarea>").text(addText)
             .attr("id", "text-"+i)
             .attr("type", "text")
-            var save = $("<section>").addClass("col-2")
-            var saveBtn = $("<button>").addClass("saveBtn")
+            var saveBtn = $("<button>").addClass("col-2 saveBtn")
+            btnHover = $("<i>").addClass("fas fa-save")
             .attr("btn-id", i)
             timeSlot.append(timeSlotText)
             timeRow.append(timeSlot)
             description.append(descriptionTask)
             timeRow.append(description)
-            save.append(saveBtn)
-            timeRow.append(save)
+            saveBtn.append(btnHover)
+            timeRow.append(saveBtn)
             calendar.append(timeRow)
             }(i))
     }
